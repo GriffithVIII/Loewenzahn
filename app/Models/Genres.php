@@ -8,11 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Genres extends Model
 {
     use HasFactory;
-    protected $primaryKey = "genres_id";
+    protected $primaryKey = "genre_id";
 
     public function Nouns_de()
     {
-        return $this->belongsTo('App\Models\Nouns_de');
+        return $this->belongsTo('App\Models\Nouns_de', 'genre_id');
     }
 
     public function Nouns_es()

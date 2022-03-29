@@ -9,14 +9,15 @@ class Nouns_de extends Model
 {
     use HasFactory;
     protected $table = 'Nouns_de';
-    protected $fillable = ['word'];
-    public function Genre()
+    protected $fillable = ["language_id", "genre_id", "word", "comment"];
+
+    public function genre()
     {
-        return $this->belongsTo('App\Models\Genres');
+        return $this->hasOne('App\Models\Genres', 'genre_id', 'genre_id');
     }
 
-    public function Language()
+    public function language()
     {
-        return $this->belongsTo('App\Models\Languages');
+        return $this->hasOne('App\Models\Languages', 'language_id', 'language_id');
     }
 }

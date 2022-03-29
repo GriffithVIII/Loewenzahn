@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Artikeltraining;
+use App\Http\Controllers\NounsDe;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,8 @@ Route::get('/artikeltraining', function () {
 
 Route::resource('artikeltraining', Artikeltraining::class);
 
+Route::get('/tables', [NounsDe::class, 'index'])->name('admin.tables');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    return view('admin.dashboard');
+})->name('admin.dashboard');

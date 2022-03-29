@@ -11,10 +11,11 @@ class Languages extends Model
     use HasFactory;
     public $timestamps = false;
     protected $primaryKey = 'language_id';
+    protected $fillable = ["language_id", "long_name", "short_name"];
 
     public function Nouns_de()
     {
-        return $this->belongsTo('App\Models\Nouns_de');
+        return $this->belongsTo('App\Models\Nouns_de', 'language_id');
     }
 
     public function Nouns_es()
