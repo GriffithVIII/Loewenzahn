@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Nouns_de extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $table = 'Nouns_de';
-    protected $fillable = ["language_id", "genre_id", "word", "comment"];
+    protected $fillable = ["id", "language_id", "genre_id", "word", "plural", "comment"];
 
     public function genre()
     {

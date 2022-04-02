@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Nouns_de;
+use App\Models\Nouns_es;
 use App\Models\Languages;
 use App\Models\Genres;
 use Yajra\DataTables\Html\Button;
@@ -11,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class Nouns_deDataTable extends DataTable
+class NounsDeDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,13 +24,19 @@ class Nouns_deDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'nouns_de.action')
+            ->addColumn('action', function ($model) {
+                return $this->getActionColumn($model);
+            })
+            ->addColumn('translated', function ($model){
+                return $this->getTranslatedColumn($model);
+            })
             ->editColumn('language_id', function ($model) {
                 return $model->language->long_name;
             })
             ->editColumn('genre_id', function ($model) {
                 return $model->genre->word;
-            });
+            })->escapeColumns([])
+            ->setRowId('id');
     }
 
  
@@ -42,7 +49,7 @@ class Nouns_deDataTable extends DataTable
      */
     public function query(Nouns_de $model)
     {
-        return $model->newQuery()->with(['language']);
+        return $model->newQuery();
     }
 
     /**
@@ -59,11 +66,8 @@ class Nouns_deDataTable extends DataTable
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
+                        Button::make('create')->text('<i class="fa-solid fa-circle-plus"></i> Create'),
                         Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
                     );
     }
 
@@ -75,14 +79,48 @@ class Nouns_deDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            //Column::make('id')->title('#'),
+            Column::make('id')->title('#'),
             Column::make('language_id')->title('Language'),
             Column::make('genre_id')->title('Article'),
             'word',
-            'comment'
+            'plural',
+            'comment',
+            Column::computed('action')
+            ->exportable(false)
+            ->printable(false)
+            ->width(120)
+            ->addClass('text-center'),
+            Column::computed('translated')
+            ->exportable(false)
+            ->printable(false)
+            ->width(60)
+            ->addClass('text-center'),
         ];
     }
 
+    protected function getActionColumn($data): string
+    {
+        $slug= 'id=' . $data->id;
+        $translateUrl = route('admin.nouns_de.translate', $slug);
+
+        return "<a class='waves-effect btn btn-group btn-action' data-value='$data->id' href='$translateUrl'><i class='fa-solid fa-language'></i></a>
+        <a class='waves-effect btn btn-group btn-action' id='childButton$data->id' onclick='showChild($data->id);'><i class='fas fa-eye'></i></a>";
+    }
+    
+    protected function getTranslatedColumn($data): string
+    {
+        if(Nouns_es::where('id', $data->id)->exists()){
+            $isTranslated = "<i style='color: green' class='fa-solid fa-circle-check'></i>";
+        }
+        else{
+            $isTranslated = "<i stlye='color: blackc' class='fa-solid fa-circle-exclamation'></i>";
+        }
+        
+        $boolTranslated = 0;
+        
+        return "<a>$isTranslated</a>";
+    }
+    
     /**
      * Get filename for export.
      *
@@ -90,6 +128,6 @@ class Nouns_deDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Nouns_de_' . date('YmdHis');
+        return 'NounsDe_' . date('YmdHis');
     }
 }

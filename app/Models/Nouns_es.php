@@ -8,15 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Nouns_es extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+
     protected $table = 'Nouns_es';
-    protected $fillable = ["language_id", "article_id", "word", "comment"];
-    public function Genre()
+    protected $fillable = ["id", "language_id", "genre_id", "word", "plural", "comment"];
+
+    public function genre()
     {
-        return $this->belongsTo('App\Models\Genres');
+        return $this->hasOne('App\Models\Genres', 'genre_id', 'genre_id');
     }
 
-    public function Language()
+    public function language()
     {
-        return $this->belongsTo('App\Models\Languages');
+        return $this->hasOne('App\Models\Languages', 'language_id', 'language_id');
     }
 }

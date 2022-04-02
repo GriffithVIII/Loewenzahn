@@ -10,13 +10,13 @@ class Genres extends Model
     use HasFactory;
     protected $primaryKey = "genre_id";
 
-    public function Nouns_de()
+    public function nouns_de()
     {
         return $this->belongsTo('App\Models\Nouns_de', 'genre_id');
     }
 
-    public function Nouns_es()
+    public function nouns_es()
     {
-        return $this->belongsTo('App\Models\Nouns_es');
+        return $this->belongsTo('App\Models\Nouns_es', 'genre_id');
     }
 }

@@ -16,9 +16,10 @@ class CreateNounsEsTable extends Migration
         Schema::create('nouns_es', function (Blueprint $table) {
             $table->id();
             $table->foreignId('language_id');
-            $table->foreignId('article_id');
+            $table->foreignId('genre_id');
             $table->string('word', 255);
-            $table->text('comment');
+            $table->string('plural', 255);
+            $table->text('comment')->nullable();
         });
     }
 

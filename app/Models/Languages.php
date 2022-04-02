@@ -13,13 +13,13 @@ class Languages extends Model
     protected $primaryKey = 'language_id';
     protected $fillable = ["language_id", "long_name", "short_name"];
 
-    public function Nouns_de()
+    public function nouns_de()
     {
         return $this->belongsTo('App\Models\Nouns_de', 'language_id');
     }
 
-    public function Nouns_es()
+    public function nouns_es()
     {
-        return $this->belongsTo('App\Models\Nouns_es');
+        return $this->belongsTo('App\Models\Nouns_es', 'language_id');
     }
 }

@@ -10,7 +10,7 @@ use App\Models\Nouns_de;
 use App\Models\Nouns_es;
 use App\DataTables\NounsDeDataTable;
 
-class NounsDe extends Controller
+class NounsEsController extends Controller
 {
     public function index(NounsDeDataTable $dataTable)
     {
@@ -19,7 +19,8 @@ class NounsDe extends Controller
         $genres = Genres::all();
         $languages = Languages::all();
 
-        //$test = Nouns_de::find(1)->language;        
+        $test = Nouns_de::find(1)->language;
+        
         return $dataTable->render('admin.tables', compact(['nouns_de', 'nouns_es', 'genres', 'languages']));
     }
 
@@ -37,14 +38,14 @@ class NounsDe extends Controller
         $nouns_de = Nouns_de::find($slug);
         $nouns_de->genre_id =  Nouns_de::find($slug)->genre->word;
         
-        $genres = Genres::where('language_id', '!=', 1)->pluck('word', 'genre_id');
-        $languages = Languages::where('language_id', '!=', 1)->pluck('long_name', 'language_id');
+        $genres = Genres::all()->pluck('word', 'genre_id');
+        $languages = Languages::all()->pluck('long_name', 'language_id')->where('id', '!=', 1);
         return view('admin.nouns_de.translate', compact(['nouns_de', 'genres', 'languages']));
     }
 
     public function store(Request $request)
     {
-        $nouns_de = Nouns_de::create($request->all());
+        $nouns_de = Nouns_es::create($request->all());
         return redirect('/tables')->with('success', 'Noun succesfully added!');
     }
     
