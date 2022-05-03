@@ -2,21 +2,27 @@
 Remove the margin in all browsers.
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 *{
     text-align: center;
 }
 
 body{
+    background-color: rgb(255, 255, 255);
 	margin: 0;
 }
 
-h1{ 
+h1, h2{ 
+    font-family: 'Libre Baskerville', serif;
     font-size: 30px !important;
     font-weight: bold !important;
 }
 
 nav{
-    background-color: rgb(232, 227, 188);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 25%);
+    border-bottom: 2px solid #d5d5d5;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -108,7 +114,7 @@ nav{
     padding: 20px
 }
 
-.scoreboard-richtig{
+.scoreboard-richtig, .scoreboard-falsch{
     text-transform: uppercase;
     color: #666;
     border: 1px solid rgb(80, 80, 80);
@@ -116,8 +122,26 @@ nav{
     padding: 15px 40px;
 }
 
-.word-question{
+.ubung-top{
+    padding: 40px;
+    /* background-image: linear-gradient(#e25555, #db2929);*/
+    background-color: #fdd007;
+    color:rgb(0, 0, 0);
+    border: 2px solid #000000;
+}
 
+.ubung-top > a{
+    position: absolute;
+    left: 20px;
+    top: 10px;
+}
+
+.ubung-top > a:hover{
+    color: white;
+}
+
+.word-card{
+    margin-top: 0px;
 }
 
 .word-question > h2{
@@ -125,11 +149,18 @@ nav{
     font-weight: bold !important;
 }
 
+.word-question{
+
+}
+
 .word-translation{
 
 }
 
+.ubung-content{
+    padding: 50px;
+}
 
 footer{
-    background-color: rgb(232, 227, 188);
+    background-color: #000000;
 }

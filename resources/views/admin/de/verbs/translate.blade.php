@@ -1,19 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tables') }}
+            {{ __('Translate') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <h2 class="card-title">{{ $nouns_de->genre->word . " " . $nouns_de->word }}</h2>
                 <section style="padding-top: 20px;">
                     <div class="row">
                         <div class="col-sm-12 col-xs-12">
-                        {!! Form::open(['url' => ['/tables/create'], 'method' => 'POST', 'class' => 'form-horizontal needs-validation m-t-10', 'novalidate']) !!}
+                        {!! Form::open(['url' => ['/de/nouns/translate'], 'method' => 'POST', 'class' => 'form-horizontal needs-validation m-t-10', 'novalidate']) !!}
                             <div class="row">
                                 <div class="form-group col-2">
+                                    {{ Form::hidden('id', $nouns_de->id) }}
                                     {{Form::Label('language_id', 'Language:')}}
                                     {{Form::select('language_id', $languages, null, ['class' => 'form-control'])}}
                                 </div>
@@ -36,7 +38,7 @@
                                     {{Form::textarea('comment', null, ['class' => 'form-control'])}}
                                 </div>
                             </div>
-                            {{Form::button('Save', ['type'=>'submit', 'class'=>'btn btn-primary waves-effect waves-light m-r-10'])}}
+                            {{Form::button('Insert', ['type'=>'submit', 'class'=>'btn btn-primary waves-effect waves-light m-r-10'])}}
                         {!! Form::close() !!}
                         </div>
                     </div>

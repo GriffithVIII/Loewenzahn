@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Loewenzahn') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -26,6 +26,12 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
+
+        <!-- DataTables Editor-->
+        <!-- <link rel="stylesheet" href="/plugins/editor/css/dataTables.editor.css"> -->
+        <link rel="stylesheet" href="/plugins/editor/css/editor.bootstrap.css">
+        <script src="{{asset('plugins/editor/js/dataTables.editor.js')}}"></script>
+        <script src="{{asset('plugins/editor/js/editor.bootstrap.min.js')}}"></script>
 
         <!-- DataTables Butons --> 
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.2/css/buttons.bootstrap5.min.css">

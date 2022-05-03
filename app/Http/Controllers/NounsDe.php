@@ -9,6 +9,7 @@ use App\Models\Languages;
 use App\Models\Nouns_de;
 use App\Models\Nouns_es;
 use App\DataTables\NounsDeDataTable;
+use App\DataTables\NounsDeDataTablesEditor;
 
 class NounsDe extends Controller
 {
@@ -20,32 +21,72 @@ class NounsDe extends Controller
         $languages = Languages::all();
 
         //$test = Nouns_de::find(1)->language;        
-        return $dataTable->render('admin.tables', compact(['nouns_de', 'nouns_es', 'genres', 'languages']));
+        return $dataTable->render('admin.de.nouns.main', compact(['nouns_de', 'nouns_es', 'genres', 'languages']));
+    }
+
+    public function editor(NounsDeDataTablesEditor $editor)
+    {
+        return $editor->process(request());
     }
 
     public function create()
     {
-        $nouns_de = Nouns_de::all();
-        $genres = Genres::all()->pluck('word', 'genre_id');
-        $languages = Languages::all()->pluck('long_name', 'language_id');
-        return view('admin.nouns_de.create', compact(['nouns_de', 'genres', 'languages']));
+        $genres = Genres::where('language_id', '!=', 2)->pluck('word', 'genre_id');
+        $languages = Languages::where('language_id', '!=', 2)->pluck('long_name', 'language_id');
+        
+        $genres_es = Genres::where('language_id', '!=', 1)->pluck('word', 'genre_id');
+        $languages_es = Languages::where('language_id', '!=', 1)->pluck('long_name', 'language_id');
+
+        return view('admin.de.nouns.create', compact(['genres', 'languages',
+        'genres_es', 'languages_es']));
     }
 
-    public function translate()
+    public function translate(Nouns_de $nouns_de)
     {
-        $slug = $_GET['id'];
-        $nouns_de = Nouns_de::find($slug);
-        $nouns_de->genre_id =  Nouns_de::find($slug)->genre->word;
-        
         $genres = Genres::where('language_id', '!=', 1)->pluck('word', 'genre_id');
         $languages = Languages::where('language_id', '!=', 1)->pluck('long_name', 'language_id');
-        return view('admin.nouns_de.translate', compact(['nouns_de', 'genres', 'languages']));
+        return view('admin.de.nouns.translate', compact(['nouns_de', 'genres', 'languages']));
+    }
+
+    public function edit(Nouns_de $nouns_de)
+    {
+        $genres = Genres::where('language_id', '!=', 2)->pluck('word', 'genre_id');
+        $languages = Languages::where('language_id', '!=', 2)->pluck('long_name', 'language_id');
+        return view('admin.de.nouns.edit', compact(['nouns_de', 'genres', 'languages']));
+    }
+
+    public function update(Nouns_de $nouns_de)
+    {			
+		$input = request()->all();
+		$nouns_de->update($input);
+		return redirect('/de/nouns')->with('success', 'Noun has been updated.');
     }
 
     public function store(Request $request)
     {
-        $nouns_de = Nouns_de::create($request->all());
-        return redirect('/tables')->with('success', 'Noun succesfully added!');
+        $input = request()->all();
+        $input_es = [];
+        $keys = array_keys($input);
+        foreach($keys as $key) {
+            if(str_contains($key, '_es')){
+                $name = trim($key, "_es");
+                $input_es[$name] = $input[$key];
+                unset($input[$key]);
+            }
+        }
+        $copy = Nouns_de::create($input)->toArray();
+        if($input_es["word"] != ""){
+            $input_es['id'] = $copy['id'];
+            Nouns_es::create($input_es);
+        }
+
+        return redirect('/de/nouns')->with('success', 'Noun succesfully added!');
     }
     
+    public function storeTranslated(Request $request)
+    {
+        Nouns_es::create($request->all());
+        return redirect('/de/nouns')->with('success', 'Noun succesfully added!');
+    }
+
 }

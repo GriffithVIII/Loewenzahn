@@ -10,7 +10,7 @@ class Nouns_es extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $table = 'Nouns_es';
+    protected $table = 'nouns_es';
     protected $fillable = ["id", "language_id", "genre_id", "word", "plural", "comment"];
 
     public function genre()

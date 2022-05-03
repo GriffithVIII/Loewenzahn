@@ -5,6 +5,23 @@
 2. Allow adding a border to an element by just adding a border-width. (https://github.com/tailwindcss/tailwindcss/pull/116)
 */
 
+.card-body {
+  padding: 2rem 6rem !important;
+}
+
+#trans-more {display: none;}
+
+.card-background{
+  padding: 40px;
+  background-color: #fdd007;
+  color:rgb(0, 0, 0);
+  border: 2px solid #000000;
+}
+
+
+tr.odd { background-color: white;  border:1px lightgrey;}
+tr.even{ background-color: rgb(232, 232, 232); border:1px lightgrey; }
+
 *,
 ::before,
 ::after {

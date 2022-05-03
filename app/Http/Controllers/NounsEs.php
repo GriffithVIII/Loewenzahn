@@ -10,7 +10,7 @@ use App\Models\Nouns_de;
 use App\Models\Nouns_es;
 use App\DataTables\NounsDeDataTable;
 
-class NounsEsController extends Controller
+class NounsEs extends Controller
 {
     public function index(NounsDeDataTable $dataTable)
     {

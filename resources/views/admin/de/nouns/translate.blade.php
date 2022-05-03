@@ -8,11 +8,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <h2 class="card-title">{{ $nouns_de->genre_id . " " . $nouns_de->word }}</h2>
+            <h2 class="card-title">{{ $nouns_de->genre->word . " " . $nouns_de->word }}</h2>
                 <section style="padding-top: 20px;">
                     <div class="row">
                         <div class="col-sm-12 col-xs-12">
-                        {!! Form::open(['url' => ['/tables/translate'], 'method' => 'POST', 'class' => 'form-horizontal needs-validation m-t-10', 'novalidate']) !!}
+                        {!! Form::open(['url' => ['/de/nouns/translate'], 'method' => 'POST', 'class' => 'form-horizontal needs-validation m-t-10', 'novalidate']) !!}
                             <div class="row">
                                 <div class="form-group col-2">
                                     {{ Form::hidden('id', $nouns_de->id) }}

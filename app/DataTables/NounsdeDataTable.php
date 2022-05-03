@@ -30,6 +30,7 @@ class NounsDeDataTable extends DataTable
             ->addColumn('translated', function ($model){
                 return $this->getTranslatedColumn($model);
             })
+            ->orderColumn('translated', 'id $1')
             ->editColumn('language_id', function ($model) {
                 return $model->language->long_name;
             })
@@ -38,8 +39,6 @@ class NounsDeDataTable extends DataTable
             })->escapeColumns([])
             ->setRowId('id');
     }
-
- 
 
     /**
      * Get query source of dataTable.
@@ -64,10 +63,13 @@ class NounsDeDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->lengthChange(true)
+				    ->pageLength(25)
+                    ->orderBy(0, 'asc')
                     ->buttons(
-                        Button::make('create')->text('<i class="fa-solid fa-circle-plus"></i> Create'),
-                        Button::make('print'),
+                        ['extend' => 'create', 'editor' => 'editor'],
+                            ['extend' => 'edit', 'editor' => 'editor'],
+                            ['extend' => 'remove', 'editor' => 'editor'],
                     );
     }
 
@@ -88,37 +90,37 @@ class NounsDeDataTable extends DataTable
             Column::computed('action')
             ->exportable(false)
             ->printable(false)
-            ->width(120)
+            ->width(160)
             ->addClass('text-center'),
-            Column::computed('translated')
-            ->exportable(false)
-            ->printable(false)
-            ->width(60)
-            ->addClass('text-center'),
+            Column::make('translated')
+            ->width(0)
+            ->addClass('text-center')
         ];
     }
 
     protected function getActionColumn($data): string
     {
-        $slug= 'id=' . $data->id;
-        $translateUrl = route('admin.nouns_de.translate', $slug);
+        $translateUrl = route('admin.de.nouns.translate', $data->id);
+        $editUrl = route('admin.de.nouns.edit', $data->id);
 
         return "<a class='waves-effect btn btn-group btn-action' data-value='$data->id' href='$translateUrl'><i class='fa-solid fa-language'></i></a>
-        <a class='waves-effect btn btn-group btn-action' id='childButton$data->id' onclick='showChild($data->id);'><i class='fas fa-eye'></i></a>";
+        <a class='waves-effect btn btn-group btn-action' id='childButton$data->id' onclick='showChild($data->id);'><i class='fas fa-eye'></i></a>
+        <a class='waves-effect btn btn-group btn-action' data-value='$data->id' href='$editUrl'><i class='fas fa-pencil-alt'></i></a>";
     }
     
     protected function getTranslatedColumn($data): string
     {
         if(Nouns_es::where('id', $data->id)->exists()){
             $isTranslated = "<i style='color: green' class='fa-solid fa-circle-check'></i>";
+            $BoolId = "1";
         }
         else{
             $isTranslated = "<i stlye='color: blackc' class='fa-solid fa-circle-exclamation'></i>";
+            $BoolId = "0";
         }
         
-        $boolTranslated = 0;
-        
-        return "<a>$isTranslated</a>";
+        return "<div style='display:hidden' data-order='$BoolId'></div>
+        <a>$isTranslated</a>";
     }
     
     /**

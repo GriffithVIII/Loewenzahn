@@ -22,4 +22,9 @@ class Languages extends Model
     {
         return $this->belongsTo('App\Models\Nouns_es', 'language_id');
     }
+
+    public function verbs_de()
+    {
+        return $this->belongsTo('App\Models\Verbs_de', 'language_id');
+    }
 }

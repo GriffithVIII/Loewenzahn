@@ -21,6 +21,11 @@
                         {{ __('Tables') }}
                     </x-jet-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ url('de/nouns') }}" :active="request()->routeIs('admin.de.nouns.main')">
+                        {{ __('Deutsch') }}
+                    </x-jet-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
