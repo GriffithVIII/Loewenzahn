@@ -1,4 +1,4 @@
-# Table of contens:
+# Contents
 - [Loewenzahn](#loewenzahn)
 - [Database manager](#database-manager)
 - [Database sample](#database-sample)
