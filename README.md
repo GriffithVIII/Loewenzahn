@@ -17,7 +17,7 @@ Using Larajet as a base, it incorporates DataTables for a more comfortable use. 
 
 
 ## Database sample
-The following database contains `233` German words and their Spanish translation can be imported.
+The following [database](https://github.com/GriffithVIII/Loewenzahn/blob/main/loewenzahn.sql) contains `233` German words and their Spanish translation can be imported.
 
 ![image](https://user-images.githubusercontent.com/51249452/234380373-7b9773a3-036e-4908-8220-38c507ad9119.png)
 
