@@ -67,9 +67,7 @@ class NounsDeDataTable extends DataTable
 				    ->pageLength(25)
                     ->orderBy(0, 'asc')
                     ->buttons(
-                        ['extend' => 'create', 'editor' => 'editor'],
-                            ['extend' => 'edit', 'editor' => 'editor'],
-                            ['extend' => 'remove', 'editor' => 'editor'],
+                        Button::make('create')
                     );
     }
 

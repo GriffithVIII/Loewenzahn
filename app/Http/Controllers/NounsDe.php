@@ -9,7 +9,6 @@ use App\Models\Languages;
 use App\Models\Nouns_de;
 use App\Models\Nouns_es;
 use App\DataTables\NounsDeDataTable;
-use App\DataTables\NounsDeDataTablesEditor;
 
 class NounsDe extends Controller
 {
@@ -22,11 +21,6 @@ class NounsDe extends Controller
 
         //$test = Nouns_de::find(1)->language;        
         return $dataTable->render('admin.de.nouns.main', compact(['nouns_de', 'nouns_es', 'genres', 'languages']));
-    }
-
-    public function editor(NounsDeDataTablesEditor $editor)
-    {
-        return $editor->process(request());
     }
 
     public function create()

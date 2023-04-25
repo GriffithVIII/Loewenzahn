@@ -18,7 +18,7 @@ use App\Http\Controllers\VerbsDe;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return redirect('/artikeltraining');
 });
 
 Route::get('/artikeltraining', function () {

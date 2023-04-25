@@ -10,6 +10,7 @@ let genres = @json($genres);
 let lastOne = 0;
 let alreadyUsed = [];
 let wordQuestion = document.getElementById("word-question");
+let wordTranslation = document.getElementById("word-translation");
 
 window.onload = function() {
   'use strict';
@@ -46,7 +47,7 @@ function shuffle(){
   }
 
   wordQuestion.innerHTML = de_word[de_word.findIndex(de_word => de_word.id === rand)].word;
-  document.getElementById("word-translation").innerHTML = es_word[es_word.findIndex(es_word => es_word.id === rand)].word;
+  wordTranslation.innerHTML = "";
 }
 
 function genreCheck(genre) {
@@ -70,6 +71,7 @@ async function scoreboard(answer, genre){
     }
     genreWord = genres[genres.findIndex(genres => genres.genre_id === genre)].word;
     actualWord = de_word[de_word.findIndex(de_word => de_word.id === rand)].word;
+    wordTranslation.innerHTML = es_word[es_word.findIndex(es_word => es_word.id === rand)].word;//# Movido mientras
     wordQuestion.innerHTML = genreWord + " " + actualWord;
     await sleep(1,5);
     shuffle();

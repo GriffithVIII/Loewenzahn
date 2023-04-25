@@ -12,6 +12,7 @@
                 let genreChild = es_word[es_word.findIndex(es_word => es_word.id === $id)].genre_id - 1;
                 let wordChild = es_word[es_word.findIndex(es_word => es_word.id === $id)].word;
                 let pluralChild = es_word[es_word.findIndex(es_word => es_word.id === $id)].plural;
+                if (pluralChild == null){ pluralChild = ""; }
                 let template =      '<tr>'+
                                         '<td><a style="transform: scaleX(-1); font-size: 25px; position: absolute; margin-top: -7px;">&#8629;</a></td>'+
                                         '<td>'+languages[languageChild].long_name+'</td>'+
