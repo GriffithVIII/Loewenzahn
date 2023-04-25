@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.1.1
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 25-04-2023 a las 19:14:50
--- Versión del servidor: 5.7.31
--- Versión de PHP: 7.3.21
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -682,7 +673,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Adolfo', 'harats500.com@gmail.com', '$2y$10$OO5AwTkUE8NSEtUVFRI./e4EtaC0B9gt.Sa6Mr43erBMwDdTJpuVS', NULL, NULL, NULL, NULL, NULL, '2022-03-22 17:16:14', '2022-03-22 17:16:14');
+(1, 'null', 'null', '$2y$10$OO5AwTkUE8NSEtUVFRI./e4EtaC0B9gt.Sa6Mr43erBMwDdTJpuVS', NULL, NULL, NULL, NULL, NULL, '2022-03-22 17:16:14', '2022-03-22 17:16:14');
 
 -- --------------------------------------------------------
 
