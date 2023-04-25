@@ -6,7 +6,7 @@
 
 
 ## Loewenzahn
-Loewenzahn is a web application coded with Laravel to practice German noun articles. It features a scorebar and a CRU[D] interface to update the .SQL database with the desired nouns.
+Loewenzahn is a web application coded with Laravel to practice German noun articles. It features a scorebar and a CRUD interface to update the .SQL database with the desired nouns.
 
 ![1lz](https://user-images.githubusercontent.com/51249452/234376927-a4cd2cef-0fea-4cce-ac81-1adf28505fb0.gif)
 
@@ -24,5 +24,5 @@ The following [database](https://github.com/GriffithVIII/Loewenzahn/blob/main/lo
 ## Features
 - Scorebar with the `correct` and `false` answers.
 - Word randomness
-- Basic database manager with CRU[D], using Larajet.
+- Basic database manager with CRUD, using Larajet.
 - .SQL databases.
